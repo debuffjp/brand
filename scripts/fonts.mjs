@@ -59,13 +59,13 @@ body{margin:0;background:#11140d;color:#f7fee7;font-family:system-ui;padding:40p
 h1{font:600 22px system-ui;margin:0 0 24px;color:#8a9479}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .tile{background:#161b10;border:1px solid #ffffff14;border-radius:16px;padding:26px 26px 18px}
-.tile.current{border-color:#a3e63566}
+.tile.current{border-color:#cffb2d66}
 .mark{display:flex;align-items:center;gap:14px}
-.mark span{font-size:72px;line-height:1;color:#a3e635;letter-spacing:-.01em}
-.deeb{width:52px;height:52px;border-radius:10px;background:linear-gradient(#d9f99d 0 18%,#a3e635 18%);position:relative;flex:none}
+.mark span{font-size:72px;line-height:1;color:#cffb2d;letter-spacing:-.01em}
+.deeb{width:52px;height:52px;border-radius:10px;background:linear-gradient(#e7fd96 0 18%,#cffb2d 18%);position:relative;flex:none}
 .deeb i{position:absolute;top:18px;width:7px;height:11px;border-radius:2px;background:#11140d}.deeb i:first-child{left:13px}.deeb i+i{right:13px}
 .tag{font-size:26px;margin-top:12px;color:#f7fee7}
-.meta{font:13px ui-monospace,monospace;color:#8a9479;margin-top:14px}.meta b{color:#d9f99d}
+.meta{font:13px ui-monospace,monospace;color:#8a9479;margin-top:14px}.meta b{color:#e7fd96}
 </style></head><body><h1>wordmark & display font candidates (all free, open licence)</h1><div class="grid">${tiles.join("")}</div></body></html>`);
 await page.evaluate(() => document.fonts.ready);
 await page.screenshot({ path: join(root, "assets", "font-options.png"), fullPage: true });
