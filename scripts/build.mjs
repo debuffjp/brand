@@ -12,8 +12,8 @@ const out = join(root, "assets");
 mkdirSync(out, { recursive: true });
 
 export const PALETTE = {
-  lime: "#a3e635",
-  limeSoft: "#d9f99d",
+  lime: "#cffb2d",
+  limeSoft: "#e7fd96",
   lime700: "#4d7c0f",
   ink: "#11140d",
   sky: "#38bdf8",
@@ -210,7 +210,7 @@ await render(
   "social-card.png",
   1200,
   630,
-  `<div style="position:absolute;inset:0;background:radial-gradient(800px 500px at 78% 40%, #a3e63522, transparent 70%)"></div>
+  `<div style="position:absolute;inset:0;background:radial-gradient(800px 500px at 78% 40%, #cffb2d22, transparent 70%)"></div>
   <div style="position:absolute;left:96px;top:120px;width:700px">
     <div style="height:150px">${inline(wordSvg(PALETTE.lime)).replace("<svg ", "<svg preserveAspectRatio=\"xMinYMid meet\" ")}</div>
     <div style="font:500 52px/1.15 Outfit;color:${PALETTE.white};margin-top:28px;letter-spacing:-.01em">more room for play.</div>
