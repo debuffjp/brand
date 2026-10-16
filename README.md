@@ -17,7 +17,7 @@ Official assets for **debuff**, the 2D web game toolkit, and its mascot **buff**
 | `assets/buff.svg`, `buff-happy.svg`, `buff-confused.svg`, `buff-512.png` | buff, vector |
 | `assets/buff@24x24.png` + `.json` | buff pixel sprite sheet (idle, hop, happy, oops, worried, sleepy). Drop it into a debuff project's `assets/` folder and it's sliced into 24×24 frames automatically |
 | `assets/social-card.png` | 1200×630 link preview |
-| `assets/org-logo.svg`, `org-logo-{256,512,1024}.png` | The **Debuff Foundation** mark: a black down-right arrow in a lime square, on a transparent background. Used for the GitHub org and the foundation |
+| `assets/org-logo.svg`, `org-logo-{256,512,1024}.png` | The **Debuff Foundation** mark: a black down-right arrow in a lime square, on a transparent background. Used for the GitHub org and the foundation, and as the debuff.jp logo and favicon (buff stays the mascot) |
 
 ## Basics
 
