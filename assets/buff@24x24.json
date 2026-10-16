@@ -1,0 +1,61 @@
+{
+  "frameWidth": 24,
+  "frameHeight": 24,
+  "columns": 6,
+  "animations": {
+    "idle": {
+      "frames": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "fps": 4,
+      "loop": true
+    },
+    "hop": {
+      "frames": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "fps": 12,
+      "loop": true
+    },
+    "happy": {
+      "frames": [
+        12,
+        13
+      ],
+      "fps": 6,
+      "loop": true
+    },
+    "oops": {
+      "frames": [
+        18,
+        19
+      ],
+      "fps": 2,
+      "loop": true
+    },
+    "worried": {
+      "frames": [
+        24,
+        25
+      ],
+      "fps": 16,
+      "loop": true
+    },
+    "sleepy": {
+      "frames": [
+        30,
+        31
+      ],
+      "fps": 1.5,
+      "loop": true
+    }
+  }
+}
