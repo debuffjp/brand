@@ -214,7 +214,7 @@ await render(
   <div style="position:absolute;left:96px;top:120px;width:700px">
     <div style="height:150px">${inline(wordSvg(PALETTE.lime))}</div>
     <div style="font:500 52px/1.15 Outfit;color:${PALETTE.white};margin-top:28px;letter-spacing:-.01em">more room for play.</div>
-    <div style="font:500 24px/1.4 'Pixelify Sans';color:${PALETTE.sky};margin-top:36px;white-space:nowrap">2D web game toolkit · built for jams · ready for agents</div>
+    <div style="font:500 24px/1.4 'Pixelify Sans';color:${PALETTE.sky};margin-top:36px;white-space:nowrap">the 2D web game toolkit</div>
   </div>
   <div style="position:absolute;right:120px;top:150px;width:300px;height:300px;transform:rotate(-6deg)">${inline(buffSvg("happy"))}</div>
   <div style="position:absolute;right:150px;top:470px;width:240px;height:22px;border-radius:50%;background:#000;opacity:.35"></div>
@@ -261,7 +261,7 @@ await page.setContent(`<!doctype html><html><head><style>${fontFace}${extraFonts
   ${row([swatch("lime", PALETTE.lime, true), swatch("limeSoft", PALETTE.limeSoft, true), swatch("ink", PALETTE.ink, false), swatch("sky", PALETTE.sky, true), swatch("pink", PALETTE.pink, true), swatch("amber", PALETTE.amber, true), swatch("violet", PALETTE.violet, true), swatch("red", PALETTE.red, true)], 14)}
   ${label("type")}
   ${specimen("Outfit 800<br>display · wordmark", `font:800 64px/1.05 Outfit;letter-spacing:-.02em;color:${PALETTE.lime}`, "make the game you'd play")}
-  ${specimen("Outfit 600<br>headings", "font:600 36px Outfit", "built for jams, ready for agents")}
+  ${specimen("Outfit 600<br>headings", "font:600 36px Outfit", "lean games, honest numbers")}
   ${specimen("Geist 400<br>body", "font:400 20px/1.6 Geist;color:#cfd6c4;max-width:900px", "debuff is an open-source toolkit for small, polished 2D web games: typed params, deterministic scenarios and a WebGL2 renderer that holds ~200k sprites at 60 fps.")}
   ${specimen("Geist Mono 400<br>code · numbers", `font:400 20px 'Geist Mono';color:${PALETTE.sky}`, "draw.sprite(hero, x, y, { flash: 0.5 })")}
   ${specimen("Pixelify Sans 500<br>accent · sparingly", `font:500 30px 'Pixelify Sans';color:${PALETTE.lime}`, `buff says hi · <span style="background:${PALETTE.lime};color:${PALETTE.ink};padding:0 10px;border-radius:6px">jam #1</span>`)}
