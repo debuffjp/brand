@@ -1,10 +1,9 @@
 // Generates debuff's brand assets into ./assets. Everything is derived from the palette,
-// the buff definition and Outfit, so the assets stay consistent with each other.
+// the buff definition and the DEBUFF letters, so the assets stay consistent with each other.
 //   npm run build
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import * as fontkit from "fontkit";
 import { chromium } from "playwright-core";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -24,39 +23,14 @@ export const PALETTE = {
   white: "#f7fee7",
 };
 
-// ---- wordmark: "debuff" in Outfit ExtraBold, outlined -----------------------------
+// ---- wordmark: the DEBUFF letters (the same drawing as debuff.jp's logo, vendored in scripts/) ----
 
-const fontFile = (weight) => join(root, `node_modules/@fontsource/outfit/files/outfit-latin-${weight}-normal.woff`);
-const font = fontkit.create(readFileSync(fontFile(800)));
-
-/** Outline text with kerning and tracking (em units, negative = tighter), y-down like SVG. Returns { d, box }. */
-function outline(text, size, tracking = -0.02) {
-  const run = font.layout(text);
-  const scale = size / font.unitsPerEm;
-  let x = 0;
-  const parts = [];
-  const box = { x1: Infinity, y1: Infinity, x2: -Infinity, y2: -Infinity };
-  run.glyphs.forEach((glyph, i) => {
-    const pos = run.positions[i];
-    const gx = x + pos.xOffset * scale;
-    // Font units are y-up; flip to SVG y-down and place at the pen position.
-    const path = glyph.path.scale(scale, -scale).translate(gx, 0);
-    parts.push(path.toSVG());
-    const bb = path.bbox;
-    box.x1 = Math.min(box.x1, bb.minX);
-    box.y1 = Math.min(box.y1, bb.minY);
-    box.x2 = Math.max(box.x2, bb.maxX);
-    box.y2 = Math.max(box.y2, bb.maxY);
-    x += pos.xAdvance * scale + tracking * size;
-  });
-  return { d: parts.join(" "), box };
-}
-
-const word = outline("debuff", 200, -0.01);
-const pad = 4;
-const wb = { x: word.box.x1 - pad, y: word.box.y1 - pad, w: word.box.x2 - word.box.x1 + pad * 2, h: word.box.y2 - word.box.y1 + pad * 2 };
+const letters = readFileSync(join(root, "scripts/debuff-letters.svg"), "utf8");
+const [vx, vy, vw, vh] = letters.match(/viewBox="([^"]+)"/)[1].split(/\s+/).map(Number);
+const word = { d: letters.match(/ d="([^"]+)"/)[1] };
+const wb = { x: vx, y: vy, w: vw, h: vh };
 const wordSvg = (fill) =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${wb.x.toFixed(1)} ${wb.y.toFixed(1)} ${wb.w.toFixed(1)} ${wb.h.toFixed(1)}" role="img" aria-label="debuff"><path fill="${fill}" d="${word.d}"/></svg>\n`;
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${wb.x.toFixed(1)} ${wb.y.toFixed(1)} ${wb.w.toFixed(1)} ${wb.h.toFixed(1)}" role="img" aria-label="DEBUFF"><path fill="${fill}" fill-rule="evenodd" d="${word.d}"/></svg>\n`;
 
 writeFileSync(join(out, "wordmark-lime.svg"), wordSvg(PALETTE.lime));
 writeFileSync(join(out, "wordmark-ink.svg"), wordSvg(PALETTE.ink));
@@ -103,7 +77,7 @@ const lockupW = capH + gap + wb.w;
 const lockupSvg = (wordFill) =>
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${lockupW.toFixed(1)} ${wb.h.toFixed(1)}" role="img" aria-label="debuff">
   <g transform="translate(0 ${(wb.h - capH).toFixed(1)}) scale(${scaleBuff.toFixed(4)})">${buffBody()}</g>
-  <path transform="translate(${(capH + gap - wb.x).toFixed(1)} ${(-wb.y).toFixed(1)})" fill="${wordFill}" d="${word.d}"/>
+  <path transform="translate(${(capH + gap - wb.x).toFixed(1)} ${(-wb.y).toFixed(1)})" fill="${wordFill}" fill-rule="evenodd" d="${word.d}"/>
 </svg>\n`;
 writeFileSync(join(out, "lockup-lime.svg"), lockupSvg(PALETTE.lime));
 writeFileSync(join(out, "lockup-ink.svg"), lockupSvg(PALETTE.ink));
@@ -270,7 +244,7 @@ await page.setContent(`<!doctype html><html><head><style>${fontFace}${extraFonts
   ${label("palette")}
   ${row([swatch("lime", PALETTE.lime, true), swatch("limeSoft", PALETTE.limeSoft, true), swatch("ink", PALETTE.ink, false), swatch("sky", PALETTE.sky, true), swatch("pink", PALETTE.pink, true), swatch("amber", PALETTE.amber, true), swatch("violet", PALETTE.violet, true), swatch("red", PALETTE.red, true)], 14)}
   ${label("type")}
-  ${specimen("Outfit 800<br>display · wordmark", `font:800 64px/1.05 Outfit;letter-spacing:-.02em;color:${PALETTE.lime}`, "make the game you'd play")}
+  ${specimen("Outfit 800<br>display", `font:800 64px/1.05 Outfit;letter-spacing:-.02em;color:${PALETTE.lime}`, "make the game you'd play")}
   ${specimen("Outfit 600<br>headings", "font:600 36px Outfit", "lean games, honest numbers")}
   ${specimen("Geist 400<br>body", "font:400 20px/1.6 Geist;color:#cfd6c4;max-width:900px", "debuff is an open-source toolkit for small, polished 2D web games: typed params, deterministic scenarios and a WebGL2 renderer that holds ~200k sprites at 60 fps.")}
   ${specimen("Geist Mono 400<br>code · numbers", `font:400 20px 'Geist Mono';color:${PALETTE.sky}`, "draw.sprite(hero, x, y, { flash: 0.5 })")}

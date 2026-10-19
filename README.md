@@ -10,7 +10,7 @@ Official assets for **debuff**, the 2D web game toolkit, and its mascot **buff**
 
 | File | Use |
 | --- | --- |
-| `assets/wordmark-lime.svg` | Default wordmark, on dark backgrounds |
+| `assets/wordmark-lime.svg` | Default DEBUFF wordmark, on dark backgrounds |
 | `assets/wordmark-ink.svg` | Wordmark on light backgrounds, and on lime |
 | `assets/wordmark-white.svg` | Wordmark on photos and dark colours (never on lime: white on lime is hard to read) |
 | `assets/lockup-lime.svg` / `.png`, `assets/lockup-ink.svg` | buff + wordmark |
@@ -23,7 +23,7 @@ Official assets for **debuff**, the 2D web game toolkit, and its mascot **buff**
 
 - The name is always lowercase: **debuff**, and the mascot is **buff**.
 - Colours: lime `#cffb2d`, limeSoft `#e7fd96`, ink `#11140d`. Anything filled with lime takes ink text, never white. Accents are sky `#38bdf8`, pink `#f472b6`, amber `#fbbf24` and violet `#a78bfa`.
-- Fonts (all OFL): Outfit (display and wordmark), Geist (body), Geist Mono (code), Pixelify Sans (pixel accents).
+- Fonts (all OFL): Outfit (display headings), Geist (body), Geist Mono (code), Pixelify Sans (pixel accents).
 - Please don't recolour, stretch or redraw the wordmark or buff, or use them to suggest an official endorsement.
 
 ## Regenerate
