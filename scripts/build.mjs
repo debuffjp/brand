@@ -67,22 +67,33 @@ writeFileSync(join(out, "wordmark-white.svg"), wordSvg(PALETTE.white));
 /** buff's body in a 64×64 box, origin top-left. Proportions from the brand guide. */
 function buffBody({ eyes = "open", ink = PALETTE.ink } = {}) {
   const eyeShapes = {
-    open: `<rect x="16" y="22" width="9" height="13" rx="3" fill="${ink}"/><rect x="39" y="22" width="9" height="13" rx="3" fill="${ink}"/>
-      <rect x="19" y="24" width="3" height="3" rx="1" fill="${PALETTE.white}"/><rect x="42" y="24" width="3" height="3" rx="1" fill="${PALETTE.white}"/>`,
+    open: `<rect x="17" y="21" width="10" height="15" rx="5" fill="${ink}"/><rect x="37" y="21" width="10" height="15" rx="5" fill="${ink}"/>`,
     happy: `<path d="M15 31 q5.5 -8 11 0" stroke="${ink}" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M38 31 q5.5 -8 11 0" stroke="${ink}" stroke-width="4" fill="none" stroke-linecap="round"/>
       <path d="M24 42 q8 7 16 0" stroke="${ink}" stroke-width="4" fill="none" stroke-linecap="round"/>`,
     confused: `<rect x="16" y="22" width="9" height="13" rx="3" fill="${ink}"/><rect x="39" y="26" width="9" height="6" rx="3" fill="${ink}"/>
       <path d="M26 46 q6 -4 12 0" stroke="${ink}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`,
   };
-  // The highlight band is clipped to the body so it follows the rounded corners.
-  const clip = `buff-body-${eyes}`;
-  return `<defs><clipPath id="${clip}"><rect width="64" height="64" rx="12"/></clipPath></defs><g clip-path="url(#${clip})"><rect width="64" height="64" fill="${PALETTE.lime}"/><rect width="64" height="11" fill="${PALETTE.limeSoft}" opacity=".7"/></g>${eyeShapes[eyes]}`;
+  // Flat, one lime, soft corners: the "squish" look (no highlight band, no outline).
+  return `<rect width="64" height="64" rx="20" fill="${PALETTE.lime}"/>${eyeShapes[eyes]}`;
 }
 
 const buffSvg = (eyes) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="buff">${buffBody({ eyes })}</svg>\n`;
 writeFileSync(join(out, "buff.svg"), buffSvg("open"));
 writeFileSync(join(out, "buff-happy.svg"), buffSvg("happy"));
 writeFileSync(join(out, "buff-confused.svg"), buffSvg("confused"));
+
+// buff hopping, squash-and-stretch from the feet, with a blink: the animated mascot (still with reduced motion).
+writeFileSync(
+  join(out, "buff-squish.svg"),
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -24 80 96" role="img" aria-label="buff, hopping"><style>
+.b{transform-origin:32px 64px;animation:hop 1.8s infinite}
+.e{transform-origin:32px 28px;animation:blink 1.8s infinite}
+@keyframes hop{0%{transform:translateY(0) scale(1,1);animation-timing-function:ease-out}8%{transform:translateY(0) scale(1.04,.96)}16%{transform:translateY(0) scale(.98,1.02)}24%{transform:translateY(0) scale(1,1);animation-timing-function:ease-in}40%{transform:translateY(0) scale(1.2,.78);animation-timing-function:cubic-bezier(.2,.8,.4,1)}50%{transform:translateY(-16px) scale(.84,1.2);animation-timing-function:ease-out}62%{transform:translateY(-22px) scale(.96,1.05);animation-timing-function:ease-in}74%{transform:translateY(0) scale(.88,1.14);animation-timing-function:ease-out}79%{transform:translateY(0) scale(1.28,.7);animation-timing-function:ease-out}87%{transform:translateY(0) scale(.94,1.08)}94%{transform:translateY(0) scale(1.04,.96)}100%{transform:translateY(0) scale(1,1)}}
+@keyframes blink{0%,26%,32%,100%{transform:scaleY(1)}29%{transform:scaleY(.12)}}
+@media (prefers-reduced-motion:reduce){.b,.e{animation:none}}
+</style><g class="b"><rect width="64" height="64" rx="20" fill="${PALETTE.lime}"/><g class="e"><rect x="17" y="21" width="10" height="15" rx="5" fill="${PALETTE.ink}"/><rect x="37" y="21" width="10" height="15" rx="5" fill="${PALETTE.ink}"/></g></g></svg>
+`,
+);
 
 // Lockup: buff at cap height, then the wordmark.
 const capH = wb.h * 0.78;
@@ -144,7 +155,6 @@ const sheetDataUrl = await page.evaluate(
         const x0 = col * FRAME + Math.floor((FRAME - w) / 2) + nudge;
         const y0 = row * FRAME + FRAME - h - lift;
         px(x0, y0, w, h, P.lime);
-        px(x0, y0, w, 2, P.limeSoft);
         // Rounded corners: knock out the four corner pixels.
         for (const [cx, cy] of [[x0, y0], [x0 + w - 1, y0], [x0, y0 + h - 1], [x0 + w - 1, y0 + h - 1]]) g.clearRect(cx, cy, 1, 1);
         const ex1 = x0 + Math.round(w * 0.25);

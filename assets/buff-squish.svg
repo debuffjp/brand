@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -24 80 96" role="img" aria-label="buff, hopping"><style>
+.b{transform-origin:32px 64px;animation:hop 1.8s infinite}
+.e{transform-origin:32px 28px;animation:blink 1.8s infinite}
+@keyframes hop{0%{transform:translateY(0) scale(1,1);animation-timing-function:ease-out}8%{transform:translateY(0) scale(1.04,.96)}16%{transform:translateY(0) scale(.98,1.02)}24%{transform:translateY(0) scale(1,1);animation-timing-function:ease-in}40%{transform:translateY(0) scale(1.2,.78);animation-timing-function:cubic-bezier(.2,.8,.4,1)}50%{transform:translateY(-16px) scale(.84,1.2);animation-timing-function:ease-out}62%{transform:translateY(-22px) scale(.96,1.05);animation-timing-function:ease-in}74%{transform:translateY(0) scale(.88,1.14);animation-timing-function:ease-out}79%{transform:translateY(0) scale(1.28,.7);animation-timing-function:ease-out}87%{transform:translateY(0) scale(.94,1.08)}94%{transform:translateY(0) scale(1.04,.96)}100%{transform:translateY(0) scale(1,1)}}
+@keyframes blink{0%,26%,32%,100%{transform:scaleY(1)}29%{transform:scaleY(.12)}}
+@media (prefers-reduced-motion:reduce){.b,.e{animation:none}}
+</style><g class="b"><rect width="64" height="64" rx="20" fill="#cffb2d"/><g class="e"><rect x="17" y="21" width="10" height="15" rx="5" fill="#11140d"/><rect x="37" y="21" width="10" height="15" rx="5" fill="#11140d"/></g></g></svg>
